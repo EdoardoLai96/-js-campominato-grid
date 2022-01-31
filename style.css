@@ -35,7 +35,9 @@ header{
     margin: 0 15px;
 }
 
-
+#play{
+    margin-right: 15px;
+}
 .nav > select , .nav > button{
     height: min-content;
 }
@@ -53,9 +55,10 @@ main{
     width: 700px;
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid black;
 }
 
-.square{
+.square-10{
     width: calc(100% / 10);
     height: calc(100% / 10);
     border: 1px solid black;
@@ -65,6 +68,38 @@ main{
     cursor: pointer;
     
 }
+
+.square-9{
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+.square-7{
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+
+.square-10:hover, .square-9:hover, .square-7:hover{
+    border: 5px solid red;
+    transition: 0.2s;
+    transform: scale(1.1);
+}
+
+.square-10.clicked:hover, .square-9.clicked:hover, .square-7.clicked:hover{
+color: white;}
 
 footer{
     height: 70px;
