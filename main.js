@@ -1,115 +1,112 @@
-// Individuo il container su html e mi ci riferisco con una variabile
 
-const container = document.getElementById("container");
 
-// creo un ciclo per poter aggiungere elementi dentro il container 
-
-const difficoltà = document.getElementById("difficoltà");
-
-difficoltà.value = "";
+// Identifico il bottone che attiverà la funzione che fa funzionare il mio gioco
 
 const play = document.getElementById("play");
 
-const reset = document.getElementById("reset");
 
-play.addEventListener("click", function(){
 
+
+
+
+// costruisco la funzione di gioco 
+
+function gioca(){
     
+    // inizializzo le  variabili che identificano il valore della difficoltà selezionatoa e il contenitore dovre andranno aggiunte le caselle 
+
+    const difficoltà = document.getElementById("difficoltà").value;
+    const container = document.getElementById("container");
+
+    // Setto il valore iniziale del container a vuoto nel momento in cui l'evento inizia 
+
+    container.innerHTML = "";
     
+    // inizializzo le variabili del numero di caselle totali del grid e delle caselle per ogni lato in base alla difficoltà,
+    //  impostandole a zero quando nessuna difficoltà è stata scelta 
+
+    let numeroCaselle = 0;
+    let casellePerLato = 0;
+
+
+
+    // inizializzo uno switch che cambia il valore delle mie variabili  (già inizializzate ) a seconda delle difficoltà scelte
     
-    if(difficoltà.value == "easy"){
-        
-        container.innerHTML= "";
-        
-        for (i=1; i <= 100; i++){
+    switch(difficoltà){
+        case "easy":
+            numeroCaselle = 100;
+            casellePerLato = 10;
+            console.log(casellePerLato);
+            console.log(numeroCaselle);
+            break;
+        case "hard":
+            numeroCaselle = 81;
+            casellePerLato = 9;
+            console.log(casellePerLato);
+            console.log(numeroCaselle);
+            break;
+        case "crazy":
+            numeroCaselle = 49;
+            casellePerLato = 7;
+            console.log(casellePerLato);
+            console.log(numeroCaselle);
+            break;
             
-            // creo dallo script stesso gli element che voglio aggiungere 
-            const node = document.createElement("div");
-            node.classList.add("square-10");
-            
-            const nodeText = document.createElement("p");
-            node.appendChild(nodeText);
-            nodeText.innerHTML = i;
-            // aggiungo a ogni elemento che è stato creato la classe già pronta del mio css 
-            
-            
-            // Aggiungo all'interno del container gli elementi creati e stilizzati (con il metodo append) 
-            container.appendChild(node);
-            
-            node.addEventListener("click", function(){
-                this.classList.add("clicked");
+        }
                 
-            }
+
+        // Costruisco un ciclo for che funzioni che sia uno solo e con una variabile
+        // (numero di caselle) unica che cambia il numero di caselle della griglia in base all'uscita dello switch
+
+
+        
+
+        for (i=1; i <= numeroCaselle; i++){
             
-            )
-            
+        //  Ad ogni azione il ciclo deve: 
+        
+        // 1) creare un nuovo nodo (la casella )            
+        const node = document.createElement("div");
+
+            // 2) aggiungere al nodo creato la classe per stilizzarlo già pronta nel css 
+        node.classList.add("square");
+        
+        // Aggiungere una larghezza e altezza che siano funzionali ai valori dell'uscita dello switch presa prima 
+
+        node.style.width = `calc(100% / ${casellePerLato})`
+        node.style.height = `calc(100% / ${casellePerLato})`
+        
+        // creare un nodo di testo che andrà  nella casella che conterrà il suo numero in successione 
+
+        const nodeText = document.createElement("p");
+
+        node.appendChild(nodeText);
+
+        nodeText.innerHTML = i;
+        
+        // Inserire la nuova casella creata e il suo testo nel container (senza cancellare e sovrascrivere la casella creata alla ripetizione precendente )
+        container.appendChild(node);
+        
+        // Per la nuova casella creata metterla in ascolto dell'evento "click" e cambiare il background al click
+
+        node.addEventListener("click", function(){
+            this.classList.add("clicked");
             
         }
         
-    } else if (difficoltà.value == "hard"){
+        )
         
-        container.innerHTML= "";
-        for (i=1; i <= 81; i++){
-            
-            // creo dallo script stesso gli element che voglio aggiungere 
-            const node = document.createElement("div");
-            node.classList.add("square-9");
-            
-            const nodeText = document.createElement("p");
-            node.appendChild(nodeText);
-            nodeText.innerHTML = i;
-            // aggiungo a ogni elemento che è stato creato la classe già pronta del mio css 
-            
-            
-            // Aggiungo all'interno del container gli elementi creati e stilizzati (con il metodo append) 
-            container.appendChild(node);
-            
-            node.addEventListener("click", function(){
-                this.classList.add("clicked");
-                
-            }
-            
-            )
-            
-            
-            
-        }
-        
-    } else if (difficoltà.value == "crazy"){
-        
-        container.innerHTML= "";
-        for (i=1; i <= 49; i++){
-            
-            // creo dallo script stesso gli element che voglio aggiungere 
-            const node = document.createElement("div");
-            node.classList.add("square-7");
-            
-            const nodeText = document.createElement("p");
-            node.appendChild(nodeText);
-            nodeText.innerHTML = i;
-            // aggiungo a ogni elemento che è stato creato la classe già pronta del mio css 
-            
-            
-            // Aggiungo all'interno del container gli elementi creati e stilizzati (con il metodo append) 
-            container.appendChild(node);
-            
-            node.addEventListener("click", function(){
-                this.classList.add("clicked");
-                
-            }
-            
-            )
-            
-            
-            
-        }
         
     }
-    
-})
-
-
-reset.addEventListener("click", function () {
-    container.innerHTML= "";
-})
-
+        
+        
+    }
+            
+            
+            play.addEventListener("click", gioca)
+            
+            
+            
+            
+            
+            
