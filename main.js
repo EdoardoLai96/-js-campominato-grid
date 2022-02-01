@@ -105,24 +105,47 @@ function gioca(){
         // Per la nuova casella creata metterla in ascolto dell'evento "click" e cambiare il background al click
         
         
+        node.addEventListener("click", mostraCella)
         
-        
-        node.addEventListener("click", function(){
-            if(!bombe.includes(parseInt(nodeText.innerHTML))){
+        function mostraCella (){
+
+            if(bombe.includes(parseInt(nodeText.innerHTML))){
                 
-                node.classList.add("clicked");
+                this.classList.add("bomb-clicked");
             }else{
-                node.classList.add("bomb-clicked");
+                this.classList.add("clicked");
+
+                 const prova = document.getElementsByClassName("bomb-clicked");
+                
+                console.log(prova);
+
+
+                    // Perchè non funziona ?????
+
+                for(i=1; i <= prova.length; i++){
+                    
+                    prova[i].removeEventListener("click", mostraCella);
+
+                }
             }
             
-            
+        }
+
+        // Dove mi blocco 
+        node.addEventListener("click", function(){
+           
         })
-        
         
         
     }
     
-    
+
+    // for(i = 1; i <= bombeCliccate.length; i++){
+
+    //     let bombaCliccata = bombeCliccate[i];
+        
+    //     alert(bombaCliccata);
+    // }
 }
 
 
