@@ -36,22 +36,15 @@ function gioca(){
         case "easy":
             numeroCaselle = 100;
             casellePerLato = 10;
-            console.log(casellePerLato);
-            console.log(numeroCaselle);
             break;
         case "hard":
             numeroCaselle = 81;
             casellePerLato = 9;
-            console.log(casellePerLato);
-            console.log(numeroCaselle);
             break;
         case "crazy":
             numeroCaselle = 49;
             casellePerLato = 7;
-            console.log(casellePerLato);
-            console.log(numeroCaselle);
             break;
-            
         }
                 
 
@@ -59,7 +52,28 @@ function gioca(){
         // (numero di caselle) unica che cambia il numero di caselle della griglia in base all'uscita dello switch
 
 
+        const bombe = [];
+
+        const numero_bombe = 16;
+
+
+        function randomNumber (min , max){
+            return Math.floor(Math.random() * (max - min + 1))
+        }
+   
         
+        for(i=1 ; i <= numero_bombe; i++){
+             bomba = randomNumber( 1 , numeroCaselle)
+
+            console.log(bomba);
+
+            bombe.push(bomba);
+
+            console.log(bombe)
+        }
+
+
+
 
         for (i=1; i <= numeroCaselle; i++){
             
@@ -86,27 +100,34 @@ function gioca(){
         
         // Inserire la nuova casella creata e il suo testo nel container (senza cancellare e sovrascrivere la casella creata alla ripetizione precendente )
         container.appendChild(node);
+
         
         // Per la nuova casella creata metterla in ascolto dell'evento "click" e cambiare il background al click
-
+        
+        
+        
+        
         node.addEventListener("click", function(){
-            this.classList.add("clicked");
+            if(!bombe.includes(parseInt(nodeText.innerHTML))){
+                
+                node.classList.add("clicked");
+            }else{
+                node.classList.add("bomb-clicked");
+            }
             
-        }
+            
+        })
         
-        )
         
         
     }
-        
-        
-    }
-            
-            
-            play.addEventListener("click", gioca)
-            
-            
-            
-            
-            
-            
+    
+    
+}
+
+
+play.addEventListener("click", gioca)
+
+
+
+
